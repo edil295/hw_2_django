@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="#" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>{{ client.name }}:</h1></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <legend><h1>Список кредитов</h1></legend>
+    {% for account in client.account_set.all %}
+        <td> Кредиты по счету {{ account.number }}</td><br>
+    {% for credit in account.credit_set.all %}
+        <td>{{ credit.sum }}</td><br>
+    {% endfor %}<br>
+    {% endfor %}
+</fieldset>
+</form>
+{% endblock content %}

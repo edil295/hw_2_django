@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mt-5 mb-5 text-center">Список клиентов</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">ФИО</th>
+      <th scope="col">Гражданство</th>
+      <th scope="col">Дата рождения</th>
+      <th scope="col">Место работы</th>
+      <th scope="col">Дата обновления</th>
+      <th scope="col">Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if latest_client_list %}
+    <ul>
+    {% for client in latest_client_list %}
+    <tr>
+      <th scope="row">{{ client.id }}</th>
+      <td>{{ client.name }}</td>
+      <td>{{ client.citizenship }}</td>
+      <td>{{ client.birth_day }}</td>
+      <td>{{ client.work_place }}</td>
+      <td>{{ client.update_date }}</td>
+      <td><a href="{% url 'detail' client.id %}">Подробнее</a></td>
+    </tr>
+  {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+  </tbody>
+</table>
+{% endblock content %}
